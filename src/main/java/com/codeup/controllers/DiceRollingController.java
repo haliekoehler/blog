@@ -12,7 +12,7 @@ import java.util.Random;
  */
 
 @Controller
-public class DiceRolling {
+public class DiceRollingController {
 
     @GetMapping("/roll-dice")
     public String rollDicePage(){
@@ -26,20 +26,28 @@ public class DiceRolling {
         int randNumber = diceRoll();
 
         if (userNumber == randNumber){
-            return "<h1>It was a match!</h1>" +
-                    "<h2>Your Guess: " + userNumber + "</h2>" +
-                    "<h2>Dice Roll: " + randNumber + "</h2>";
+            return match(userNumber, randNumber);
          } else {
-            return "<h1>Not a match!</h1>" +
-                    "<h2>Your Guess: " + userNumber + "</h2>" +
-                    "<h2>Dice Roll: " + randNumber + "</h2>";
+            return noMatch(userNumber, randNumber);
         }
     }
 
-    public int diceRoll (){
+    private int diceRoll (){
         Random rand = new Random();
         // 6 maximum, 1 minimum
         return rand.nextInt(6) + 1;
+    }
+
+    private String match(int userNumber, int randNumber){
+        return "<h1>It was a match!</h1>" +
+                "<h2>Your Guess: " + userNumber + "</h2>" +
+                "<h2>Dice Roll: " + randNumber + "</h2>";
+    }
+
+    private String noMatch(int userNumber, int randNumber){
+        return  "<h1>It was a match!</h1>" +
+                "<h2>Your Guess: " + userNumber + "</h2>" +
+                "<h2>Dice Roll: " + randNumber + "</h2>";
     }
 
 
