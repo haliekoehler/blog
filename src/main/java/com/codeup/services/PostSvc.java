@@ -50,3 +50,9 @@ public class PostSvc {
 //
 // Create a few test posts so that you have some data that you can test.
 // Use the posts service to pass all the posts and individual posts to the corresponding views.
+
+
+// FORM MODEL BINDING EXERCISE
+// Add a save method to your PostsSvc.
+// It should take in a Post object, set it's id property, and add it to the list of posts.
+//
