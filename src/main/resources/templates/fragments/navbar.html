@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>Navbar</title>
-</head>
+<head th:replace="fragments/header :: head"></head>
+
 <body>
 
-<div th:fragment="navbar">
-    <nav>
-        <ul>
-            <li>Link1</li>
-            <li>Link2</li>
-            <li>Link3</li>
-        </ul>
-    </nav>
-</div>
+    <div class="navbar" th:fragment="navbar">
+        <nav>
+            <ul>
+                <li>Link1</li>
+                <li>Link2</li>
+                <li>Link3</li>
+            </ul>
+        </nav>
+    </div>
 
 </body>
 </html>
