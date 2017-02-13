@@ -1,7 +1,7 @@
 package com.codeup.services;
 
 import com.codeup.models.Post;
-import com.codeup.repositories.Posts;
+import com.codeup.repositories.PostsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class PostSvc {
 
     @Autowired
-    Posts postsDao;
+    PostsRepository postsRepositoryDao;
 
     private List<Post> posts = new ArrayList<>();
 
