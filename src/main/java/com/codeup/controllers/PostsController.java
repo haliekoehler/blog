@@ -45,7 +45,7 @@ public class PostsController {
 
         // get this from the session
         User user = new User();
-        user.setId(2);
+        user.setId(1);
         post.setUser(user);
         postsRepositoryDao.save(post);
         model.addAttribute("post", post);

@@ -27,6 +27,12 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user") // defined at the object level
     private List<Post> posts;  // these are all the ads created by this user
 
+    public User(String username, String email, String password){
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     // pattern
     // COPY CONSTRUCTOR -> an alternative to "clone"
     public User(User user) {
@@ -73,5 +79,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }

@@ -15,34 +15,43 @@ import java.util.List;
 @Service("postSvc")
 public class PostSvc {
 
-    @Autowired
-    PostsRepository postsRepositoryDao;
-
     private List<Post> posts = new ArrayList<>();
+    private PostsRepository repository;
 
-    public PostSvc (){
-        createPosts();
+    @Autowired
+    public PostSvc(PostsRepository repository){
+        this.repository = repository;
     }
 
-    public List<Post> findAll() {
-        return posts;
-    }
 
-    public Post save (Post post){
-        post.setId(posts.size()+1);
-        posts.add(post);
-        return post;
-    }
 
-    public Post findOne(int id){
-        return posts.get(id-1);
-    }
-
-    private void createPosts() {
-        for(int i = 0; i < 50; i++){
-            save(new Post("title" + (i+1), "Body Content" + (i+2)));
-        }
-    }
+//    PostsRepository postsRepositoryDao;
+//
+//    private List<Post> posts = new ArrayList<>();
+//
+//    public PostSvc (){
+//        createPosts();
+//    }
+//
+//    public List<Post> findAll() {
+//        return posts;
+//    }
+//
+//    public Post save (Post post){
+//        post.setId(posts.size()+1);
+//        posts.add(post);
+//        return post;
+//    }
+//
+//    public Post findOne(int id){
+//        return posts.get(id-1);
+//    }
+//
+//    private void createPosts() {
+//        for(int i = 0; i < 50; i++){
+//            save(new Post("title" + (i+1), "Body Content" + (i+2)));
+//        }
+//    }
 
 
 }

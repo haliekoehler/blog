@@ -13,7 +13,7 @@ public class AuthenticationController {
 
     @GetMapping("/login")
     public String showLoginForm(){
-//        System.out.println(new BCryptPasswordEncoder().encode("codeup"));
+        System.out.println(new BCryptPasswordEncoder().encode("password"));
         return "login";
     }
 
