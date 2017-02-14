@@ -7,10 +7,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 /**
  * Created by HKoehler on 2/13/17.
@@ -45,8 +48,15 @@ public class AuthenticationController {
 
     // creating a new User object
     // @ModelAttribute will do this for you
+
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user){ // <- create user from input values
+    public String registerUser(@Valid User user, Errors validation, Model viewModel){ // <- create user from input values and apply validations, replaced @ModelAttribute with @Valid
+
+        if(validation.hasErrors()){
+            viewModel.addAttribute("errors", validation);
+            viewModel.addAttribute("user", user);
+            return "/register";
+        }
 
         String hashedPassword = encoder.encode(user.getPassword()); // <- use encoder to hash password & save in variable
         user.setPassword(hashedPassword); // <- save hashedPassword as users password in DB

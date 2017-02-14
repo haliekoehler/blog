@@ -4,9 +4,13 @@ import com.codeup.models.Post;
 import com.codeup.models.User;
 import com.codeup.repositories.PostsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Created by HKoehler on 2/7/17.
@@ -40,12 +44,19 @@ public class PostsController {
         return "/posts/create";
     }
 
+    // @Valid call Model Attribute first
     @PostMapping("/posts/create")
-    public String create(@ModelAttribute Post post, Model model){
+    public String create(@Valid Post post, Errors validation, Model model){
 
-        // get this from the session
-        User user = new User();
-        user.setId(1);
+        // if there are errors in the form
+        if(validation.hasErrors()){
+            model.addAttribute("errors", validation);
+            model.addAttribute("post", post);
+            return "posts/create";
+        }
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         post.setUser(user);
         postsRepositoryDao.save(post);
         model.addAttribute("post", post);

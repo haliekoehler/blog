@@ -8,11 +8,18 @@
 <h1>Create a post:</h1>
 
 <form th:action="@{/posts/create}" th:method="POST" th:object="${post}">
+
     <h4>Title</h4>
     <input th:field="*{title}" />
+    <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
+
     <h4>Body</h4>
     <input th:field="*{body}" />
+    <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}" />
+
     <input type="submit" />
+
+
 </form>
 
 </body>
