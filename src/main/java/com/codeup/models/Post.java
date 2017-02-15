@@ -28,6 +28,9 @@ public class Post {
     @Size(min = 5, message = "Description must have at least 5 characters")
     private String body;
 
+    @Column
+    private String image;
+
     // will define your foreign key
     @ManyToOne
     @JoinColumn (name = "post_id") // defined at the table level
@@ -71,6 +74,14 @@ public class Post {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 
