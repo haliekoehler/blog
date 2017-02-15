@@ -12,4 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface UsersRepository extends CrudRepository<User, Integer> {
     // select * from user username = ?
     public User findByUsername(String username);
+
+    public User findById(Integer id);
 }

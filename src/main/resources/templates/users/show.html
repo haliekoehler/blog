@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/header :: head"></head>
+<body>
+<div th:include="fragments/navbar :: navbar"></div>
+
+    <div class="container">
+        <div th:object="${user}">
+            <h3 th:test="*{username}"></h3>
+            <p th:text="*{email}"></p>
+        </div>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        This content is only shown to authenticated users.
+
+        Logged User: <span sec:authentication="name"></span><br />
+        Existing Roles: <span sec:authentication="principal.authorities"></span><br />
+
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <div> show this only for admins </div>
+        </div>
+
+        <div sec:authorize="hasRole('ROLE_USER')">
+            <div> show this only for users </div>
+        </div>
+
+        <div sec:authorize="hasRole('ROLE_GUEST')">
+            <div> show this only for guests </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

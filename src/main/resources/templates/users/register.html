@@ -9,7 +9,7 @@
         <div class="row">
             <h1>Register</h1>
         </div>
-        <form th:action="@{/register}" th:method="POST" th:object="${user}">
+        <form th:action="@{/users/register}" th:method="POST" th:object="${user}">
             <label for="username">Username</label>
             <input class="form-control" id="username" name="username" th:field="*{username}" />
             <p th:if="${#fields.hasErrors('username')}" th:error="*{username}" />

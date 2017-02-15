@@ -3,6 +3,7 @@ package com.codeup.controllers;
 import com.codeup.models.Post;
 import com.codeup.models.User;
 import com.codeup.repositories.PostsRepository;
+import com.codeup.services.UserSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,11 +23,16 @@ import java.util.List;
 /**
  * Created by HKoehler on 2/7/17.
  */
+
+
 @Controller
 public class PostsController {
 
     @Autowired
     private PostsRepository postsRepositoryDao;
+
+    @Autowired
+    UserSvc userSvc;
 
     public PostsController(PostsRepository postsRepositoryDao) {
         this.postsRepositoryDao = postsRepositoryDao;
@@ -93,9 +99,9 @@ public class PostsController {
             e.printStackTrace();
         }
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        post.setUser(user);
+        post.setUser(userSvc.loggedInUser());
         post.setImage(filename);
         postsRepositoryDao.save(post);
         model.addAttribute("post", post);
