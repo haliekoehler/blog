@@ -50,7 +50,16 @@ public class AuthenticationController {
     // @ModelAttribute will do this for you
 
     @PostMapping("/register")
-    public String registerUser(@Valid User user, Errors validation, Model viewModel){ // <- create user from input values and apply validations, replaced @ModelAttribute with @Valid
+    public String registerUser(
+            @Valid User user, // <- create user from input values and apply validations, replaced @ModelAttribute with @Valid
+            Errors validation,
+            Model viewModel,
+            @RequestParam(name = "password_confirm") String passwordConfirmation){
+
+        // checks password & password_confirm match
+        if(!passwordConfirmation.equals(user.getPassword())){
+            validation.rejectValue("password", "user.password", "Passwords do not match");
+        }
 
         if(validation.hasErrors()){
             viewModel.addAttribute("errors", validation);

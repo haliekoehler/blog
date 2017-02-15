@@ -11,6 +11,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by HKoehler on 2/7/17.
@@ -27,8 +29,14 @@ public class PostsController {
 
     @GetMapping("/posts")
     public String allPosts (Model model){
-        model.addAttribute("posts", postsRepositoryDao.findAll());
+//        model.addAttribute("posts", postsRepositoryDao.findAll());
+        model.addAttribute("posts", Collections.emptyList());
         return "/posts/index"; // <-- index.html
+    }
+
+    @GetMapping("/posts.json")
+    public @ResponseBody List<Post> all(){
+        return (List<Post>) postsRepositoryDao.findAll();
     }
 
     @GetMapping("/posts/{id}")

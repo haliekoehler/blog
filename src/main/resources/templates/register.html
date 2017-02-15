@@ -11,18 +11,19 @@
         </div>
         <form th:action="@{/register}" th:method="POST" th:object="${user}">
             <label for="username">Username</label>
-            <input class="form-control" id="username" th:field="*{username}" />
+            <input class="form-control" id="username" name="username" th:field="*{username}" />
             <p th:if="${#fields.hasErrors('username')}" th:error="*{username}" />
 
             <label for="email">Email</label>
-            <input class="form-control" id="email" th:field="*{email}" />
+            <input class="form-control" id="email" name="email" th:field="*{email}" />
             <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" />
 
-
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" th:field="*{password}" />
+            <input type="password" class="form-control" name="password" id="password" th:field="*{password}" />
             <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
 
+            <label for="password_confirm">Confirm Password</label>
+            <input type="password" class="form-control" name="password_confirm" id="password_confirm" />
 
             <input class="btn btn-primary" type="submit" />
         </form>
